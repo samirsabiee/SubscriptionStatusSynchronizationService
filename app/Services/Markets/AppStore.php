@@ -2,7 +2,7 @@
 
 namespace App\Services\Markets;
 
-use App\Enums\PlatformEnumType;
+use App\Enums\PlatformEnum;
 use App\Services\Market;
 
 class AppStore extends Market
@@ -14,6 +14,6 @@ class AppStore extends Market
 
     function appsPlatform(): string
     {
-        return PlatformEnumType::IOS;
+        return PlatformEnum::IOS;
     }
 }
