@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\Files\FolderFile;
-use App\Services\Market;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Collection;
 
 class App extends BaseModel
 {
@@ -13,9 +10,9 @@ class App extends BaseModel
     {
         return $this->belongsTo(Platform::class);
     }
-    public function getMarketsAttribute(): Collection
+
+    public function user(): BelongsTo
     {
-        $markets = FolderFile::getClassNamespaces('Services/Markets');
-        return $markets->filter(fn($market) => $instance = resolve($market) instanceof Market && $instance->appsPlatform() === $this->platform->name);
+        return $this->belongsTo(User::class);
     }
 }
