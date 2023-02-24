@@ -2,7 +2,7 @@
 
 namespace App\Services\Markets;
 
-use App\Enums\PlatformEnumType;
+use App\Enums\PlatformEnum;
 use App\Services\Market;
 
 class GooglePlay extends Market
@@ -15,6 +15,6 @@ class GooglePlay extends Market
 
     function appsPlatform(): string
     {
-        return PlatformEnumType::ANDROID;
+        return PlatformEnum::ANDROID;
     }
 }
