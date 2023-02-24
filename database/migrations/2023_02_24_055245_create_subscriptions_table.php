@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,6 +15,7 @@ return new class extends Migration
             $table->foreignId('app_id')->constrained();
             $table->foreignId('market_id')->constrained();
             $table->string('status');
+            $table->unique(['app_id', 'market_id']);
             $table->timestamps();
         });
     }
