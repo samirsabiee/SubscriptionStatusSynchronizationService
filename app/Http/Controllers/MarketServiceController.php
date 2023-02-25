@@ -20,15 +20,15 @@ class MarketServiceController extends Controller
     public function googlePlay(Request $request)
     {
 
-        return response()->json([
+        return response()->json($this->statusCode == 200 ? [
             'status' => $this->subscriptionStatus
-        ], $this->statusCode);
+        ] : [], $this->statusCode);
     }
 
     public function appStore(Request $request)
     {
-        return response()->json([
+        return response()->json($this->statusCode == 200 ? [
             'subscription' => $this->subscriptionStatus
-        ], $this->statusCode);
+        ] : [], $this->statusCode);
     }
 }
