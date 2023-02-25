@@ -2,7 +2,7 @@
 
 namespace App\Services\Markets;
 
-use App\Enums\PlatformEnum;
+use App\Models\Subscription;
 use App\Services\Market;
 
 class GooglePlay extends Market
@@ -13,8 +13,12 @@ class GooglePlay extends Market
         return config('googleplay');
     }
 
-    function appsPlatform(): string
+    function updateStatus(Subscription $subscription)
     {
-        return PlatformEnum::ANDROID;
+        if (!$this->fetchSubscriptionStatus('hello')->isSuccessful()) {
+            //TODO
+        } else {
+            $subscription->update(['status' => $this->getBody()->get('status')]);
+        }
     }
 }
