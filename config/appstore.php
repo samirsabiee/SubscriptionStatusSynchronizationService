@@ -1,4 +1,4 @@
 <?php
 return [
-    'base_url' => 'http://0.0.0.0:9000'
+    'base_url' => 'http://localhost:8000/api/appstore'
 ];
