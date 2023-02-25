@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Subscription extends BaseModel
 {
+    protected $fillable = ['status'];
 
     public function market(): BelongsTo
     {
