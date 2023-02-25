@@ -11,12 +11,15 @@ abstract class Market implements IMarket
     private $body = null;
     private $statusCode = null;
 
-    public function fetchSubscriptionStatus(string $appName): self
+    private ?Subscription $subscription = null;
+
+    public function fetchSubscriptionStatus(Subscription $subscription): self
     {
         if (is_null($this->body) || is_null($this->statusCode)) {
-            $response = Http::post($this->config()['base_url'], ['app' => $appName]);
+            $response = Http::post($this->config()['base_url'], ['app' => $subscription->app->name]);
             $this->body = $response->json();
             $this->statusCode = $response->status();
+            $this->subscription = $subscription;
         }
         return $this;
     }
