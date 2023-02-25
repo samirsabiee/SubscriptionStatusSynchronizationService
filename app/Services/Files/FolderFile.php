@@ -15,7 +15,7 @@ class FolderFile
             throw new FileException('given app_path not exist');
         }
 
-        $files = File::files(app_path('Services/Markets'));
+        $files = File::files(app_path($app_path));
 
         return collect($files)->map(function ($file) {
             $path = Str::afterLast($file->getPathname(), app_path());
