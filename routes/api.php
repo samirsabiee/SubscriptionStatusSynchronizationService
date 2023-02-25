@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/googleplay', [\App\Http\Controllers\MarketServiceController::class, 'googlePlay'])->name('market-service.google-play');
+Route::post('/appstore', [\App\Http\Controllers\MarketServiceController::class, 'appstore'])->name('market-service.appstore');
