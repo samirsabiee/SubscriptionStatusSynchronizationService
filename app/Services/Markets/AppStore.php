@@ -2,7 +2,7 @@
 
 namespace App\Services\Markets;
 
-use App\Enums\PlatformEnum;
+use App\Models\Subscription;
 use App\Services\Market;
 
 class AppStore extends Market
@@ -12,8 +12,12 @@ class AppStore extends Market
         return config('appstore');
     }
 
-    function appsPlatform(): string
+    function updateStatus(Subscription $subscription)
     {
-        return PlatformEnum::IOS;
+        if (!$this->fetchSubscriptionStatus('hello')->isSuccessful()) {
+            //TODO
+        }else {
+            $subscription->update(['status' => $this->getBody()->get('subscription')]);
+        }
     }
 }
