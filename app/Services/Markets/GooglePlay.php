@@ -16,7 +16,7 @@ class GooglePlay extends Market
 
     function updateStatus(Subscription $subscription)
     {
-        if (!$this->fetchSubscriptionStatus($subscription->app->name)->isSuccessful()) {
+        if (!$this->fetchSubscriptionStatus($subscription)->isSuccessful()) {
             dispatch(CallQueuedClosure::create(function () use ($subscription) {
                 $subscription->market->service->updateStatus($subscription);
             }))->delay(now()->addHour());
