@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Services\Files\MarketFileManager;
 
-class Market extends Model
+class Market extends BaseModel
 {
-    use HasFactory;
+    public function getServiceAttribute(): ?\App\Services\Market
+    {
+        return MarketFileManager::getMarketService($this->name);
+    }
 }
