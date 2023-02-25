@@ -19,8 +19,8 @@ class SyncAppSubscriptionStatusJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Subscription::query()->chunk(10, function (Collection $subscription) {
-            $subscription->each(function (Subscription $subscription) {
+        Subscription::query()->chunk(10, function (Collection $subscriptions) {
+            $subscriptions->each(function (Subscription $subscription) {
                 $subscription->market->service->updateStatus($subscription);
             });
         });
