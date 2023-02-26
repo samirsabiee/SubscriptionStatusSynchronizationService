@@ -24,5 +24,7 @@ class SyncAppSubscriptionStatusJob implements ShouldQueue
                 $subscription->market->service->updateStatus($subscription);
             });
         });
+
+        RecordExpirationCountJob::dispatch();
     }
 }
