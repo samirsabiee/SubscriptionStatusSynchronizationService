@@ -22,13 +22,17 @@ class MarketServiceController extends Controller
 
         return response()->json($this->statusCode == 200 ? [
             'status' => $this->subscriptionStatus
-        ] : [], $this->statusCode);
+        ] : [
+            'error' => true
+        ], $this->statusCode);
     }
 
     public function appStore(Request $request)
     {
         return response()->json($this->statusCode == 200 ? [
             'subscription' => $this->subscriptionStatus
-        ] : [], $this->statusCode);
+        ] : [
+            'error' => true
+        ], $this->statusCode);
     }
 }
