@@ -18,10 +18,11 @@ class AppFactory extends Factory
      */
     public function definition(): array
     {
+        $users_ids = User::query()->where('id', '>', 1)->pluck('id')->toArray();
         return [
             'name' => $this->faker->name,
             'platform_id' => Platform::query()->inRandomOrder()->first()->id,
-            'user_id' => User::query()->inRandomOrder()->first()->id,
+            'user_id' => $this->faker->randomElement($users_ids)
             //'status' => $this->faker->randomElement([]),
         ];
     }
