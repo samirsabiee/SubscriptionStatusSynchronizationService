@@ -39,7 +39,7 @@ class ExpiredSubscriptionStatusNotification extends Notification implements Shou
     {
         return (new MailMessage)
             ->subject("{$this->app_name} Expired")
-            ->line("{$this->app_name} has been expired!")
+            ->line("{$this->app_name} has been expired in last run")
             ->line('Thank you for using our application!');
     }
 
