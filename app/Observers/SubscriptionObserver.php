@@ -6,6 +6,7 @@ use App\Enums\AppSubscriptionStatusEnum;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Notifications\ExpiredSubscriptionStatusNotification;
+use Illuminate\Support\Facades\Cache;
 
 class SubscriptionObserver
 {
@@ -29,7 +30,16 @@ class SubscriptionObserver
             // If we had a role and permission (like bouncer package), this query would be better
             /** @var User $admin */
             $admin = User::query()->whereId(1)->first();
-            $admin->notify((new ExpiredSubscriptionStatusNotification($subscription->app->name))->delay(now()->addMinute()));
+            $admin->notify((new ExpiredSubscriptionStatusNotification($subscription->app->name)));
+        }
+
+        if($subscription->isDirty('status') && $subscription->status == AppSubscriptionStatusEnum::EXPIRED){
+            $exp_count = Cache::tags('expiration_count')->get('exp_count');
+            if(is_null($exp_count)){
+                Cache::tags('expiration_count')->set('exp_count', 1);
+            }else{
+                Cache::tags('expiration_count')->increment('exp_count');
+            }
         }
     }
 
